@@ -1,10 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:msb="http://www.mashibing.com/schema/user"
+       xmlns:customize="http://www.poplar.com/schema/poplar"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/context  http://www.springframework.org/schema/context/spring-context.xsd
-        http://www.mashibing.com/schema/user http://www.mashibing.com/schema/user.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.poplar.com/schema/poplar http://www.poplar.com/schema/poplar.xsd">
+
+    <customize:poplar id="poplar" name="七猫之冬" job="Java Web and Server develop"/>
+
+    <!--测试spring解析自定义标签-->
+    <context:property-placeholder location="classpath:db.properties"/>
+    <context:component-scan base-package="com.poplar.bean"/>
+
+    <bean id="apple" class="com.poplar.bean.Apple">
+        <property name="color" value="red"/>
+        <property name="weight" value="200.00"/>
+        <property name="water" ref="water"/>
+    </bean>
+    <bean id="water" class="com.poplar.bean.Water">
+        <property name="color" value="red"/>
+        <property name="density" value="1.0"/>
+        <property name="apple" ref="apple"/>
+    </bean>
 
 </beans>
+
+

@@ -1,1 +1,1 @@
-http\://www.mashibing.com/schema/user=com.mashibing.selftag.UserNamespaceHandler
+http\://www.poplar.com/schema/poplar=com.poplar.customize_tag.CustomizeNamespaceHandler

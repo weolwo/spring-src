@@ -16,16 +16,15 @@
 
 package org.springframework.beans.factory.xml;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import org.springframework.beans.factory.config.BeanDefinition;
+import org.springframework.beans.factory.config.BeanDefinitionHolder;
+import org.springframework.lang.Nullable;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import org.springframework.beans.factory.config.BeanDefinition;
-import org.springframework.beans.factory.config.BeanDefinitionHolder;
-import org.springframework.lang.Nullable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Support class for implementing custom {@link NamespaceHandler NamespaceHandlers}.
@@ -83,7 +82,8 @@ public abstract class NamespaceHandlerSupport implements NamespaceHandler {
 	private BeanDefinitionParser findParserForElement(Element element, ParserContext parserContext) {
 		// 获取元素名称
 		String localName = parserContext.getDelegate().getLocalName(element);
-		// 根据元素名称找到对应的解析器
+		// 根据元素名称找到对应的元素解析器  <context:property-placeholder location="classpath:db.properties"/>对应的解析器
+		// PropertyPlaceholderBeanDefinitionParser
 		BeanDefinitionParser parser = this.parsers.get(localName);
 		if (parser == null) {
 			parserContext.getReaderContext().fatal(

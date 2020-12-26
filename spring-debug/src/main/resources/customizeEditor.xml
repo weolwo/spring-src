@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="user" class="com.poplar.bean.User">
+        <property name="name" value="七猫之东"/>
+        <property name="birthday" value="2000-12-03T10:15:30.00Z"/>
+    </bean>
+
+    <!-- 由于CustomEditorConfigurer类有两种属性设置方式，另外一种是 Map-->
+    <bean class="org.springframework.beans.factory.config.CustomEditorConfigurer">
+        <property name="propertyEditorRegistrars">
+            <list>
+                <bean class="com.poplar.customizeEditor.CustomizeTimePropertyEditRegistrar"/>
+            </list>
+        </property>
+    </bean>
+
+</beans>
+
+

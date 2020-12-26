@@ -16,21 +16,20 @@
 
 package org.springframework.beans.factory.config;
 
-import java.beans.PropertyEditor;
-import java.util.Map;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.PropertyEditorRegistrar;
 import org.springframework.core.Ordered;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ClassUtils;
 
+import java.beans.PropertyEditor;
+import java.util.Map;
+
 /**
  * 此类用来方便的注册一个用户自定义的属性编辑器
- *
+ * <p>
  * {@link BeanFactoryPostProcessor} implementation that allows for convenient
  * registration of custom {@link PropertyEditor property editors}.
  *
@@ -88,75 +87,78 @@ import org.springframework.util.ClassUtils;
  * implementations to reuse editor registration there.
  *
  * @author Juergen Hoeller
- * @since 27.02.2004
  * @see java.beans.PropertyEditor
  * @see org.springframework.beans.PropertyEditorRegistrar
  * @see ConfigurableBeanFactory#addPropertyEditorRegistrar
  * @see ConfigurableBeanFactory#registerCustomEditor
  * see org.springframework.validation.DataBinder#registerCustomEditor
+ * @since 27.02.2004
  */
+// 自定义的属性编辑器需要注册到该类的propertyEditorRegistrars或者customEditors上，才能让spring识别
 public class CustomEditorConfigurer implements BeanFactoryPostProcessor, Ordered {
 
-	protected final Log logger = LogFactory.getLog(getClass());
+    protected final Log logger = LogFactory.getLog(getClass());
 
-	private int order = Ordered.LOWEST_PRECEDENCE;  // default: same as non-Ordered
+    private int order = Ordered.LOWEST_PRECEDENCE;  // default: same as non-Ordered
 
-	@Nullable
-	private PropertyEditorRegistrar[] propertyEditorRegistrars;
+    @Nullable
+    private PropertyEditorRegistrar[] propertyEditorRegistrars;
 
-	@Nullable
-	private Map<Class<?>, Class<? extends PropertyEditor>> customEditors;
-
-
-	public void setOrder(int order) {
-		this.order = order;
-	}
-
-	@Override
-	public int getOrder() {
-		return this.order;
-	}
-
-	/**
-	 * Specify the {@link PropertyEditorRegistrar PropertyEditorRegistrars}
-	 * to apply to beans defined within the current application context.
-	 * <p>This allows for sharing {@code PropertyEditorRegistrars} with
-	 * {link org.springframework.validation.DataBinder DataBinders}, etc.
-	 * Furthermore, it avoids the need for synchronization on custom editors:
-	 * A {@code PropertyEditorRegistrar} will always create fresh editor
-	 * instances for each bean creation attempt.
-	 * @see ConfigurableListableBeanFactory#addPropertyEditorRegistrar
-	 */
-	public void setPropertyEditorRegistrars(PropertyEditorRegistrar[] propertyEditorRegistrars) {
-		this.propertyEditorRegistrars = propertyEditorRegistrars;
-	}
-
-	/**
-	 * Specify the custom editors to register via a {@link Map}, using the
-	 * class name of the required type as the key and the class name of the
-	 * associated {@link PropertyEditor} as value.
-	 * @see ConfigurableListableBeanFactory#registerCustomEditor
-	 */
-	public void setCustomEditors(Map<Class<?>, Class<? extends PropertyEditor>> customEditors) {
-		this.customEditors = customEditors;
-	}
+    @Nullable
+    private Map<Class<?>, Class<? extends PropertyEditor>> customEditors;
 
 
-	@Override
-	public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
-		// 如果属性编辑注册器不等于空
-		if (this.propertyEditorRegistrars != null) {
-			// 遍历属性编辑注册器的集合
-			for (PropertyEditorRegistrar propertyEditorRegistrar : this.propertyEditorRegistrars) {
-				// 将属性编辑注册器添加到beanFactory
-				beanFactory.addPropertyEditorRegistrar(propertyEditorRegistrar);
-			}
-		}
-		// 如果自定义编辑器不等于空
-		if (this.customEditors != null) {
-			// 遍历自定义编辑器集合将自定义编辑器添加到beanFactory中
-			this.customEditors.forEach(beanFactory::registerCustomEditor);
-		}
-	}
+    public void setOrder(int order) {
+        this.order = order;
+    }
+
+    @Override
+    public int getOrder() {
+        return this.order;
+    }
+
+    /**
+     * Specify the {@link PropertyEditorRegistrar PropertyEditorRegistrars}
+     * to apply to beans defined within the current application context.
+     * <p>This allows for sharing {@code PropertyEditorRegistrars} with
+     * {link org.springframework.validation.DataBinder DataBinders}, etc.
+     * Furthermore, it avoids the need for synchronization on custom editors:
+     * A {@code PropertyEditorRegistrar} will always create fresh editor
+     * instances for each bean creation attempt.
+     *
+     * @see ConfigurableListableBeanFactory#addPropertyEditorRegistrar
+     */
+    public void setPropertyEditorRegistrars(PropertyEditorRegistrar[] propertyEditorRegistrars) {
+        this.propertyEditorRegistrars = propertyEditorRegistrars;
+    }
+
+    /**
+     * Specify the custom editors to register via a {@link Map}, using the
+     * class name of the required type as the key and the class name of the
+     * associated {@link PropertyEditor} as value.
+     *
+     * @see ConfigurableListableBeanFactory#registerCustomEditor
+     */
+    public void setCustomEditors(Map<Class<?>, Class<? extends PropertyEditor>> customEditors) {
+        this.customEditors = customEditors;
+    }
+
+
+    @Override
+    public void postProcessBeanFactory(ConfigurableListableBeanFactory beanFactory) throws BeansException {
+        // 如果属性编辑注册器不等于空
+        if (this.propertyEditorRegistrars != null) {
+            // 遍历属性编辑注册器的集合
+            for (PropertyEditorRegistrar propertyEditorRegistrar : this.propertyEditorRegistrars) {
+                // 将属性编辑注册器添加到beanFactory
+                beanFactory.addPropertyEditorRegistrar(propertyEditorRegistrar);
+            }
+        }
+        // 如果自定义编辑器不等于空
+        if (this.customEditors != null) {
+            // 遍历自定义编辑器集合将自定义编辑器添加到beanFactory中
+            this.customEditors.forEach(beanFactory::registerCustomEditor);
+        }
+    }
 
 }

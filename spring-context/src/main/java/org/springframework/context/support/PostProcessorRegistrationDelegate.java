@@ -260,8 +260,7 @@ final class PostProcessorRegistrationDelegate {
      * @param beanFactory
      * @param applicationContext
      */
-    public static void registerBeanPostProcessors(
-            ConfigurableListableBeanFactory beanFactory, AbstractApplicationContext applicationContext) {
+    public static void registerBeanPostProcessors(ConfigurableListableBeanFactory beanFactory, AbstractApplicationContext applicationContext) {
 
         // 找到所有实现了BeanPostProcessor接口的类
         String[] postProcessorNames = beanFactory.getBeanNamesForType(BeanPostProcessor.class, true, false);

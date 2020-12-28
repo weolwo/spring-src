@@ -899,6 +899,7 @@ public abstract class AbstractApplicationContext extends DefaultResourceLoader
 		String[] listenerBeanNames = getBeanNamesForType(ApplicationListener.class, true, false);
 		for (String listenerBeanName : listenerBeanNames) {
 			getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);
+			//此处也可以改写成这样，因为其他地方也会getBean()实例化addApplicationListenerBean中的listenerBeanName
 //			getApplicationEventMulticaster().addApplicationListener(this.getBean(listenerBeanName,ApplicationListener.class));
 		}
 

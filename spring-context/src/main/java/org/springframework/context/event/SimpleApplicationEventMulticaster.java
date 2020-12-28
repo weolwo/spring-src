@@ -16,17 +16,16 @@
 
 package org.springframework.context.event;
 
-import java.util.concurrent.Executor;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.ApplicationEvent;
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.ResolvableType;
 import org.springframework.lang.Nullable;
 import org.springframework.util.ErrorHandler;
+
+import java.util.concurrent.Executor;
 
 /**
  * Simple implementation of the {@link ApplicationEventMulticaster} interface.
@@ -133,7 +132,7 @@ public class SimpleApplicationEventMulticaster extends AbstractApplicationEventM
 		// 返回此广播器的当前任务执行程序
 		Executor executor = getTaskExecutor();
 		// getApplicationListeners方法是返回与给定事件类型匹配的应用监听器集合
-		// 遍历所有的监听器
+		// 遍历所有的监听器根据type
 		for (ApplicationListener<?> listener : getApplicationListeners(event, type)) {
 			if (executor != null) {
 				// 如果executor不为空，则使用executor调用监听器

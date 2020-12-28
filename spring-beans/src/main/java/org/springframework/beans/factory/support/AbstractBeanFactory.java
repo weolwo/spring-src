@@ -930,15 +930,15 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 		// Track whether it is instantiation/destruction aware
 		// 此处是为了设置某些状态变量，这些状态变量会影响后续的执行流程，只需要判断是否是指定的类型，然后设置标志位即可
 		if (beanPostProcessor instanceof InstantiationAwareBeanPostProcessor) {
-			// 该变量表示beanfactory是否已注册过InstantiationAwareBeanPostProcessor
+			// 该变量表示beanFactory是否已注册过InstantiationAwareBeanPostProcessor
 			this.hasInstantiationAwareBeanPostProcessors = true;
 		}
 		if (beanPostProcessor instanceof DestructionAwareBeanPostProcessor) {
-			// 该变量表示beanfactory是否已注册过DestructionAwareBeanPostProcessor
+			// 该变量表示beanFactory是否已注册过DestructionAwareBeanPostProcessor
 			this.hasDestructionAwareBeanPostProcessors = true;
 		}
 		// Add to end of list
-		// 将beanPostProcessor添加到beanPostProcessors缓存中
+		// 将beanPostProcessor添加到beanPostProcessors缓存中,在实例化的时候会取
 		this.beanPostProcessors.add(beanPostProcessor);
 	}
 

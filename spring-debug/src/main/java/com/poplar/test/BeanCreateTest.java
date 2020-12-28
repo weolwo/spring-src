@@ -1,5 +1,6 @@
 package com.poplar.test;
 
+import com.poplar.config.CustomizeClassPathXmlApplicationContext;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -9,8 +10,10 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class BeanCreateTest {
 
     public static void main(String[] args) {
-        ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("customizeEditor.xml");
-        System.out.println(ac.getBean("user"));
+        //ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("customizeEditor.xml");
+        CustomizeClassPathXmlApplicationContext ac = new CustomizeClassPathXmlApplicationContext("applicationContext.xml");
+        System.out.println(ac.getBean("apple"));
+        System.out.println(ac.getBean("dataSource"));
     }
 
 

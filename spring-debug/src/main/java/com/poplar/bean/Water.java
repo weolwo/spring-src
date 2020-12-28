@@ -1,8 +1,11 @@
 package com.poplar.bean;
 
+import org.springframework.stereotype.Component;
+
 /**
  * Create BY poplar ON 2020/12/21
  */
+@Component
 public class Water {
 
     private String color;

@@ -1,5 +1,6 @@
 package com.poplar.config;
 
+import com.poplar.postProcessor.CustomizeBeanFactoryPostProcessor;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -18,5 +19,7 @@ public class CustomizeClassPathXmlApplicationContext extends ClassPathXmlApplica
         //修改默认的允许循环依赖
         //beanFactory.setAllowCircularReferences(false);
         super.customizeBeanFactory(beanFactory);
+        super.addBeanFactoryPostProcessor(new CustomizeBeanFactoryPostProcessor());
     }
+
 }

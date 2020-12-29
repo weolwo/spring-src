@@ -1,6 +1,7 @@
 package com.poplar.test;
 
 import com.poplar.config.CustomizeClassPathXmlApplicationContext;
+import com.poplar.factoryBean.Orange;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -10,21 +11,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class BeanCreateTest {
 
     public static void main(String[] args) {
-        //ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("customizeEditor.xml");
-        CustomizeClassPathXmlApplicationContext ac = new CustomizeClassPathXmlApplicationContext("applicationContext.xml");
-        System.out.println(ac.getBean("apple"));
-        System.out.println(ac.getBean("dataSource"));
+        // ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("customizeEditor.xml");
+        //CustomizeClassPathXmlApplicationContext ac = new CustomizeClassPathXmlApplicationContext("applicationContext.xml");
+        CustomizeClassPathXmlApplicationContext ac = new CustomizeClassPathXmlApplicationContext("factoryBean.xml");
+        System.out.println(ac.getBean("&customizeFactoryBean"));
+        System.out.println(ac.getBean("customizeFactoryBean"));
+        System.out.println(ac.getBean(Orange.class));
     }
-
-
-
-
-
-
-
-
-
-
 
 
     @Test

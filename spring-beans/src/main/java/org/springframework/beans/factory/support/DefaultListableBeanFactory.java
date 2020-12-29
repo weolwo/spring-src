@@ -498,6 +498,8 @@ public class DefaultListableBeanFactory extends AbstractAutowireCapableBeanFacto
 			if (!isAlias(beanName)) {
 				try {
 					// 获取合并的BeanDefinition，合并的BeanDefinition指的是整合了父BeanDefinition的属性，然后属性值会转换为RootBeanDefinition
+					//getMergedLocalBeanDefinition(beanName);第一次进来这里面是空的，每次循环将会把所有有关的bean定义信息缓存起来，在bean实例化的
+					//时候就可以直接从该缓存中取BeanDefinition，这样可以提高效率
 					RootBeanDefinition mbd = getMergedLocalBeanDefinition(beanName);
 					// Only check bean definition if it is complete.
 					//抽象的BeanDefinition是不做考虑，抽象的就是拿来继承的

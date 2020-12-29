@@ -15,6 +15,14 @@
 
     <bean class="com.poplar.postProcessor.CustomizeBeanDefinitionRegistryPostProcessor"/>
 
+    <bean id="conversionService" class="org.springframework.context.support.ConversionServiceFactoryBean">
+        <property name="converters">
+            <set>
+                <bean class="com.poplar.converter.CustomizeDateConverter"/>
+            </set>
+        </property>
+    </bean>
+
     <bean id="apple" class="com.poplar.bean.Apple">
         <property name="color" value="red"/>
         <property name="weight" value="200.00"/>

@@ -209,12 +209,13 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 	 * @throws BeansException if the bean could not be created
 	 */
 	@SuppressWarnings("unchecked")
-	protected <T> T doGetBean(
-			String name, @Nullable Class<T> requiredType, @Nullable Object[] args, boolean typeCheckOnly)
+	protected <T> T doGetBean(String name, @Nullable Class<T> requiredType, @Nullable Object[] args, boolean typeCheckOnly)
 			throws BeansException {
 
 		/**
-		 * 提取对应的beanName，很多同学可能会认为此处直接使用即可，为什么还要进行转换呢，原因在于当bean对象实现FactoryBean接口之后就会变成&beanName，同时如果存在别名，也需要把别名进行转换*/
+		 * 提取对应的beanName，很多同学可能会认为此处直接使用即可，为什么还要进行转换呢，原因在于当bean对象实现FactoryBean接口之后就会变成&beanName，
+		 * 同时如果存在别名，也需要把别名进行转换
+		 * */
 		String beanName = transformedBeanName(name);
 		Object bean;
 
@@ -266,7 +267,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 					return (T) parentBeanFactory.getBean(nameToLookup);
 				}
 			}
-			// 如果不是做类型检查，那么表示要创建bean，此处在集合中做一个记录
+			// 如果不是做类型检查，那么表示要创建bean，此处在集合中做一个记录，spring的bean创建过程中的bean状态都是通过集合来记录的
 			if (!typeCheckOnly) {
 				markBeanAsCreated(beanName);
 			}
@@ -302,6 +303,7 @@ public abstract class AbstractBeanFactory extends FactoryBeanRegistrySupport imp
 				// Create bean instance.
 				// 创建bean的实例对象
 				if (mbd.isSingleton()) {
+					//第二个参数lambda 表达式类型是 ObjectFactory，真正调用是在调用方法 getObject() 时真正调用
 					sharedInstance = getSingleton(beanName, () -> {
 						try {
 							return createBean(beanName, mbd, args);

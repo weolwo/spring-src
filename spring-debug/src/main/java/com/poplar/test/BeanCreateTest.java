@@ -11,20 +11,16 @@ public class BeanCreateTest {
 
     public static void main(String[] args) {
         //ClassPathXmlApplicationContext ac = new ClassPathXmlApplicationContext("customizeEditor.xml");
-        CustomizeClassPathXmlApplicationContext ac = new CustomizeClassPathXmlApplicationContext("applicationContext.xml");
+       /* CustomizeClassPathXmlApplicationContext ac = new CustomizeClassPathXmlApplicationContext("applicationContext.xml");
         System.out.println(ac.getBean("apple"));
-        System.out.println(ac.getBean("dataSource"));
+        System.out.println(ac.getBean("dataSource"));*/
+
+        //实例化过程测试
+        CustomizeClassPathXmlApplicationContext ac = new CustomizeClassPathXmlApplicationContext("test.xml");
+        System.out.println(ac.getBean("student1"));
+        System.out.println(ac.getBean("student2"));
+        ac.close();
     }
-
-
-
-
-
-
-
-
-
-
 
 
     @Test

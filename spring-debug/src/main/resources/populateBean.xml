@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+    <context:component-scan base-package="com.poplar.populateBean"/>
+
+    <!--    <bean id="teacher1" class="com.poplar.populateBean.Teacher" autowire="byName"/>
+
+        <bean id="teacher2" class="com.poplar.populateBean.Teacher" autowire="byType"/>
+
+        <bean id="user" class="com.poplar.bean.Person">
+            <property name="name" value="七猫之秋"/>
+            <property name="id" value="1"/>
+        </bean>-->
+
+    <bean id="book" class="com.poplar.populateBean.Book">
+        <property name="name">
+            <null></null>
+        </property>
+    </bean>
+</beans>

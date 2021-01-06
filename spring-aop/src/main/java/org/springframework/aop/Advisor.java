@@ -32,6 +32,8 @@ import org.aopalliance.aop.Advice;
  *
  * @author Rod Johnson
  * @author Juergen Hoeller
+ *
+ * 一个Advisor里面可以包含多个Advice
  */
 public interface Advisor {
 

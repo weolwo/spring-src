@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <bean id="logAspects" class="com.poplar.aop.LogAspects"/>
+    <bean id="customizeCalculator" class="com.poplar.aop.CustomizeCalculator"/>
+
+    <aop:config>
+        <aop:aspect ref="logAspects">
+            <aop:pointcut id="customizePoint" expression="execution(* com.poplar.aop.CustomizeCalculator.*(..)))"/>
+            <aop:around method="around" pointcut-ref="customizePoint"/>
+            <aop:before method="before" pointcut-ref="customizePoint"/>
+            <aop:after method="after" pointcut-ref="customizePoint"/>
+            <aop:after-returning method="returning" pointcut-ref="customizePoint" returning="result"/>
+            <aop:after-throwing method="throwable" pointcut-ref="customizePoint" throwing="exception"/>
+        </aop:aspect>
+    </aop:config>
+    <!--使用注解的时候需要开启-->
+    <!--<aop:aspectj-autoproxy/>-->
+</beans>

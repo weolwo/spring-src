@@ -559,6 +559,8 @@ public class Enhancer extends AbstractClassGenerator {
 		}
 	}
 
+	//通过newInstance来创建EnhancerKey对象，正常晴空下，只需要new一个对象就可以调用方法了，但是KEY_FACTORY是一个EnhancerKey类型，
+	//是一个内部接口，需要使用动态代理来创建对象
 	private Object createHelper() {
 		preValidate();
 		Object key = KEY_FACTORY.newInstance((superclass != null) ? superclass.getName() : null,

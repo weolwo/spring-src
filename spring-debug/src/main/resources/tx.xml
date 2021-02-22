@@ -23,6 +23,11 @@
 
     <bean id="bookService" class="com.poplar.tx.xml.BookService">
         <property name="bookDao" ref="bookDao"/>
+        <property name="accountService" ref="accountService"/>
+    </bean>
+
+    <bean id="accountService" class="com.poplar.tx.xml.AccountService">
+        <property name="bookDao" ref="bookDao"/>
     </bean>
 
     <bean id="bookDao" class="com.poplar.tx.xml.BookDao">
@@ -31,12 +36,12 @@
 
     <aop:config>
         <aop:pointcut id="txPoint" expression="execution( * com.poplar.tx.xml.*.*(..))"/>
-        <aop:advisor advice-ref="customizeAdvice"  pointcut-ref="txPoint"/>
+        <aop:advisor advice-ref="customizeAdvice" pointcut-ref="txPoint"/>
     </aop:config>
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <tx:advice id="customizeAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="addAmount" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="addMoney" propagation="REQUIRES_NEW"/>
             <tx:method name="sellBook" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>

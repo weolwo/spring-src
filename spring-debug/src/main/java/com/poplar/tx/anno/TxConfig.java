@@ -50,6 +50,11 @@ public class TxConfig {
     }
 
     @Bean
+    public AccountService accountService() {
+        return new AccountService();
+    }
+
+    @Bean
     public BookDao bookDao() {
         return new BookDao();
     }

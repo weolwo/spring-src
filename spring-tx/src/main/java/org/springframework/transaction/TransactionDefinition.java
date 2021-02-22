@@ -19,8 +19,8 @@ package org.springframework.transaction;
 import org.springframework.lang.Nullable;
 
 /**
- * Interface that defines Spring-compliant transaction properties.
- * Based on the propagation behavior definitions analogous to EJB CMT attributes.
+ * Interface that defines Spring-compliant(顺应，顺从) transaction properties.
+ * Based on the propagation behavior definitions analogous(类似的，模拟的，类比，同功的) to EJB CMT attributes.
  *
  * <p>Note that isolation level and timeout settings will not get applied unless
  * an actual new transaction gets started. As only {@link #PROPAGATION_REQUIRED},

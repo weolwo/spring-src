@@ -52,6 +52,8 @@ public enum Propagation {
 	/**
 	 * Support a current transaction, throw an exception if none exists.
 	 * Analogous to EJB transaction attribute of the same name.
+	 * adj. 强制的；托管的；命令的
+	 * n. 受托者（等于 mandatary）必须在事务中运行
 	 */
 	MANDATORY(TransactionDefinition.PROPAGATION_MANDATORY),
 

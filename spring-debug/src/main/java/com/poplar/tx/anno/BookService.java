@@ -13,6 +13,8 @@ public class BookService {
     @Autowired
     private BookDao bookDao;
 
+    @Autowired
+    private AccountService accountService;
 
     // @Transactional(propagation = Propagation.REQUIRED)
     public void decStock(Integer id) {
@@ -25,13 +27,10 @@ public class BookService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void sellBook(Integer bookId) {
         decStock(bookId);
-        addMoney();
+        accountService.addMoney();
         throw new RuntimeException();
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void addMoney() {
-        bookDao.incAccount();
-    }
+
 
 }

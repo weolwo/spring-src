@@ -9,6 +9,15 @@ public class BookService {
 
     private BookDao bookDao;
 
+    private AccountService accountService;
+
+    public AccountService getAccountService() {
+        return accountService;
+    }
+
+    public void setAccountService(AccountService accountService) {
+        this.accountService = accountService;
+    }
 
     public void decStock(Integer id) {
         Book book = bookDao.getBookById(id);
@@ -20,21 +29,15 @@ public class BookService {
 
     public void sellBook(Integer bookId) {
         decStock(bookId);
-        try {
-            addAmount();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-//        int[] arr = {};
-//        int a = arr[0];
-    }
-
-    public void addAmount() {
-        bookDao.addAmount();
+//        try {
+        accountService.addMoney();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
         int[] arr = {};
         int a = arr[0];
-        bookDao.incrBookPrice(7);
     }
+
 
     public BookDao getBookDao() {
         return bookDao;

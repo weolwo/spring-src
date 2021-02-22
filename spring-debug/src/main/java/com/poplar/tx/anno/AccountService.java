@@ -12,8 +12,10 @@ public class AccountService {
     @Autowired
     private BookDao bookDao;
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional(propagation = Propagation.NESTED)
     public void addMoney() {
         bookDao.incAccount();
+        int[] arr = {};
+        int a = arr[0];
     }
 }

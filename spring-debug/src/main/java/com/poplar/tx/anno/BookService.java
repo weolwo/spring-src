@@ -27,8 +27,12 @@ public class BookService {
     @Transactional(propagation = Propagation.REQUIRED)
     public void sellBook(Integer bookId) {
         decStock(bookId);
-        accountService.addMoney();
-        throw new RuntimeException();
+        try {
+            accountService.addMoney();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //throw new RuntimeException();
     }
 
 

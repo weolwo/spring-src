@@ -23,8 +23,7 @@ SET FOREIGN_KEY_CHECKS = 0;
 DROP TABLE IF EXISTS `account`;
 CREATE TABLE `account`  (
   `id` int(11) NOT NULL,
-  `amount` decimal(10, 2) NULL DEFAULT NULL,
-  `book_id` int(11) NULL DEFAULT NULL,
+  `amount` decimal(10, 2) NULL DEFAULT NULL
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8mb4 COLLATE = utf8mb4_zh_0900_as_cs ROW_FORMAT = Dynamic;
 

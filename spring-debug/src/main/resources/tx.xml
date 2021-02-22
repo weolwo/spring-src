@@ -21,24 +21,23 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
-    <bean id="bookService" class="com.poplar.tx.BookService">
+    <bean id="bookService" class="com.poplar.tx.xml.BookService">
         <property name="bookDao" ref="bookDao"/>
     </bean>
 
-    <bean id="bookDao" class="com.poplar.tx.BookDao">
+    <bean id="bookDao" class="com.poplar.tx.xml.BookDao">
         <property name="jdbcTemplate" ref="jdbcTemplate"/>
     </bean>
 
-    <!--<aop:config>
-        <aop:pointcut id="txPoint" expression="execution( * com.poplar.tx.*.*.*(..))"/>
+    <aop:config>
+        <aop:pointcut id="txPoint" expression="execution( * com.poplar.tx.xml.*.*(..))"/>
         <aop:advisor advice-ref="customizeAdvice"  pointcut-ref="txPoint"/>
-    </aop:config>-->
+    </aop:config>
     <tx:annotation-driven transaction-manager="transactionManager"/>
-   <!-- <tx:advice id="customizeAdvice" transaction-manager="transactionManager">
+    <tx:advice id="customizeAdvice" transaction-manager="transactionManager">
         <tx:attributes>
-            <tx:method name="*"/>
-            <tx:method name="add" propagation="REQUIRED"/>
-            <tx:method name="get*" read-only="true"/>
+            <tx:method name="addAmount" propagation="REQUIRED" read-only="true"/>
+            <tx:method name="sellBook" propagation="REQUIRED"/>
         </tx:attributes>
-    </tx:advice>-->
+    </tx:advice>
 </beans>

@@ -1,4 +1,4 @@
-package com.poplar.tx;
+package com.poplar.tx.xml;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -11,6 +11,6 @@ public class TXTest {
         ClassPathXmlApplicationContext ca = new ClassPathXmlApplicationContext("tx.xml");
         BookService bookService = ca.getBean("bookService", BookService.class);
 
-        bookService.multipleTxTest(7);
+        bookService.sellBook(7);
     }
 }

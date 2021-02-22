@@ -1,5 +1,7 @@
-package com.poplar.tx;
+package com.poplar.tx.anno;
 
+import com.poplar.tx.Book;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
@@ -7,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class BookDao {
 
+    @Autowired
     private JdbcTemplate jdbcTemplate;
 
     public Book getBookById(Integer id) {
@@ -19,15 +22,6 @@ public class BookDao {
         }, id);
     }
 
-
-    public JdbcTemplate getJdbcTemplate() {
-        return jdbcTemplate;
-    }
-
-    public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
-        this.jdbcTemplate = jdbcTemplate;
-    }
-
     public void decStock(Integer bookId) {
         String sql = "update stock set numbers=numbers-1 where book_id=?";
         jdbcTemplate.update(sql, bookId);
@@ -38,8 +32,8 @@ public class BookDao {
         jdbcTemplate.update(sql, id);
     }
 
-    public void incAccount(Integer bookId) {
-        String sql = "update account set amount=amount+10 where book_id=?";
-        jdbcTemplate.update(sql, bookId);
+    public void incAccount() {
+        String sql = "update account set amount=amount+100";
+        jdbcTemplate.update(sql);
     }
 }
